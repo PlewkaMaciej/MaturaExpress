@@ -11,6 +11,8 @@ const DesktopHeader = () => {
         pt: "15px",
         display: "flex",
         justifyContent: "center",
+        zIndex: 10,
+        position: "relative",
       }}
     >
       <Box
@@ -41,8 +43,9 @@ const DesktopHeader = () => {
           alt="Logo"
         />
         <Box sx={{ display: "flex", flexDirection: "row", gap: "100px" }}>
-          {menuItems.map((items) => (
+          {menuItems.map((items, index) => (
             <Typography
+              key={index}
               sx={{
                 cursor: "pointer",
                 transition: "transform 0.3s ease-in-out",
