@@ -1,26 +1,78 @@
 import { Box, Typography } from "@mui/material";
 import { styled, keyframes } from "@mui/system";
+import { useState, useEffect, useRef } from "react";
+import ExampleLesson from "../ExampleLesson/ExampleLesson";
+const fadeInOutTopToBottom = keyframes`
+  0% {
+    opacity: 0;
+    clip-path: inset(0% 0 100% 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0% 0 0 0);
+  }
+`;
+interface AnimatedBoxProps {
+  shouldAnimate: boolean;
+}
+const AnimatedBox = styled(Box)(({ shouldAnimate }: AnimatedBoxProps) => ({
+  animation: shouldAnimate
+    ? `${fadeInOutTopToBottom} 4s 1 linear forwards`
+    : "none",
+  position: "absolute",
+  bottom: 40,
+  width: "100%",
+  height: "1000px",
+  overflow: "hidden",
+  willChange: "opacity, clip-path",
+  zIndex: 1,
+  opacity: 0, // Initially hidden
+}));
 const AboutOurCourse = () => {
-  const AnimatedBox = styled(Box)({
-    // animation: `${fadeInOutTopToBottom} 4s 1 linear`,
-    position: "absolute",
-    bottom: 40,
-    width: "100%",
-    height: "1000px",
-    overflow: "hidden",
-    willChange: "opacity, clip-path",
-    zIndex: 1,
-  });
+  const [startAnimation, setStartAnimation] = useState(false);
+  const boxRef = useRef(null);
+
+  useEffect(() => {
+    const handleIntersect: IntersectionObserverCallback = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setStartAnimation(true);
+          observer.disconnect(); // Po odpaleniu animacji przestajemy "słuchać"
+        }
+      });
+    };
+
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, options);
+    if (boxRef.current) {
+      observer.observe(boxRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         position: "relative",
-        bottom: "20vh",
+        bottom: "18vh",
       }}
     >
-      <AnimatedBox style={{ zIndex: 1, top: "5%" }}>
+      <AnimatedBox
+        shouldAnimate={startAnimation}
+        style={{ zIndex: 1, top: "3%" }}
+      >
         <svg
           viewBox="0 0 800 800"
           xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +112,7 @@ const AboutOurCourse = () => {
         <Typography variant="h4" color={"white"}>
           Kurs maturalny Mathura
         </Typography>
-        <Box sx={{ background: "#F8F4F0", borderRadius: "50px" }}>
+        <Box ref={boxRef} sx={{ background: "#F8F4F0", borderRadius: "50px" }}>
           <Typography variant="body1" color={"#172b3d"} sx={{ p: "50px" }}>
             Kurs maturalny Mathura to nasz flagowy produkt, stworzony z myślą o
             uczniach pragnących osiągnąć sukces na maturze z matematyki.
@@ -71,6 +123,7 @@ const AboutOurCourse = () => {
             jakość, doświadczenie i sprawdzone metody nauczania.
           </Typography>
         </Box>
+        <ExampleLesson />
       </Box>
     </Box>
   );
