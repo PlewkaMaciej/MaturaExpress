@@ -41,7 +41,14 @@ const ExampleLesson = () => {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", pt: "80px" }}>
+    <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+    background:"white",
+    
+    }}
+  >
       <Box
         sx={{
           display: "flex",

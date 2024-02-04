@@ -1,13 +1,15 @@
 import { Box, Typography, CardMedia } from "@mui/material";
 import { CustomButton } from "../../components/commons/CustomButton";
 import DesktopHeader from "../../components/commons/Headers/DesktopHeader";
-import stripes from "../../public/Bez nazwy-2.png";
-import xy from "../../public/xy-removebg-preview.png";
-import pytagoras from "../../public/pytagoras-removebg-preview.png";
-import book from "../../public/book-removebg-preview (1).png";
+import stripes from "../../public/cyrkiel__2_-removebg-preview.png";
+
+import pytagoras from "../../public/trojkat-removebg-preview.png";
+import book from "../../public/MathuraExpress-removebg-preview.png";
 import { styled, keyframes } from "@mui/system";
 import { useState, useEffect } from "react";
 import AboutOurCourse from "../../components/AboutOwners/AboutOurCouse";
+import ExampleLesson from "../../components/ExampleLesson/ExampleLesson";
+
 const fadeInOutTopToBottom = keyframes`
   0% {
     opacity: 0;
@@ -22,7 +24,7 @@ const fadeInOutTopToBottom = keyframes`
 const AnimatedBox = styled(Box)({
   animation: `${fadeInOutTopToBottom} 4s 1 linear`,
   position: "absolute",
-  bottom: 40,
+
   width: "100%",
   height: "100%",
   overflow: "hidden",
@@ -49,11 +51,12 @@ export default function Home() {
 
   return (
     <>
+  
       <Box
         sx={{
+          
           backgroundColor: "#172b3d",
-          backgroundImage:
-            "url('https://www.transparenttextures.com/patterns/batthern.png')",
+          minHeight:"1400px",
           overflow: "hidden",
         }}
       >
@@ -100,52 +103,35 @@ export default function Home() {
             sx={{
               position: "absolute",
               top: "250px",
+              left:"5%"
             }}
           >
             <CardMedia
               component="img"
               style={{
-                width: "20%",
+                width: "70%",
+            
                 zIndex: 1,
                 objectFit: "contain",
                 background: "none",
                 transform: `translate(${-cursorX / 50}px, ${-cursorY / 50}px)`,
               }}
-              image={stripes.src}
+              image={book.src}
               alt="Logo"
             />
           </Box>
+         
           <Box
             sx={{
               position: "absolute",
-              top: "200px",
-              right: "300px",
-            }}
-          >
-            <CardMedia
-              component="img"
-              style={{
-                width: "20%",
-                zIndex: 1,
-                objectFit: "contain",
-                background: "none",
-                transform: `translate(${-cursorX / 50}px, ${-cursorY / 50}px)`,
-              }}
-              image={xy.src}
-              alt="Logo"
-            />
-          </Box>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "200px",
+              top: "150px",
               right: "550px",
             }}
           >
             <CardMedia
               component="img"
               style={{
-                width: "30%",
+                width: "35%",
                 zIndex: 1,
                 objectFit: "contain",
                 background: "none",
@@ -165,13 +151,13 @@ export default function Home() {
             <CardMedia
               component="img"
               style={{
-                width: "30%",
+                width: "50%",
                 zIndex: 1,
                 objectFit: "contain",
                 background: "none",
                 transform: `translate(${-cursorX / 50}px, ${-cursorY / 50}px)`,
               }}
-              image={book.src}
+              image={stripes.src}
               alt="Logo"
             />
           </Box>
@@ -212,6 +198,10 @@ export default function Home() {
         </Box>
         <AboutOurCourse />
       </Box>
+    
+        
+      <ExampleLesson />
+    
     </>
   );
 }

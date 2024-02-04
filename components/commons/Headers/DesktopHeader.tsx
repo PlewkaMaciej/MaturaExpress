@@ -1,5 +1,5 @@
 import { Box, CardMedia, Typography } from "@mui/material";
-import logo from "../../../public/myOrthos-straight.png";
+import logo from "../../../public/logoTriangle-removebg-preview.png"
 import { CustomButton } from "../CustomButton";
 
 const menuItems = ["O nas", "Zakup kurs", "Dlaczego nasz kurs?", "Kariera"];

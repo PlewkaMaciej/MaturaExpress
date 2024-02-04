@@ -1,7 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography,CardMedia } from "@mui/material";
 import { styled, keyframes } from "@mui/system";
 import { useState, useEffect, useRef } from "react";
-import ExampleLesson from "../ExampleLesson/ExampleLesson";
+import stars from "../../public/Two_bright_yellow_stars_arranged_on_a_transparent__converted-removebg-preview.png";
+import trophy from "../../public/A_trophy_outline_with_white_contours_on_a_black_ba_converted-removebg-preview.png";
+import thirty from "../../public/416400187_1100807687604084_3113345086124072053_n-removebg-preview.png";
+import arrow from "../../public/converted_arrow-removebg-preview.png";
 const fadeInOutTopToBottom = keyframes`
   0% {
     opacity: 0;
@@ -40,14 +43,14 @@ const AboutOurCourse = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setStartAnimation(true);
-          observer.disconnect(); // Po odpaleniu animacji przestajemy "słuchać"
+          observer.disconnect(); 
         }
       });
     };
 
     const options: IntersectionObserverInit = {
       root: null,
-      rootMargin: "0px",
+    
       threshold: 1.0,
     };
 
@@ -66,23 +69,25 @@ const AboutOurCourse = () => {
         display: "flex",
         justifyContent: "center",
         position: "relative",
-        bottom: "18vh",
+        backgroundColor: "#172b3d",
+    bottom:"20vh"
       }}
     >
+   
       <AnimatedBox
         shouldAnimate={startAnimation}
-        style={{ zIndex: 1, top: "3%" }}
+        style={{ zIndex: 1, top: "6%", }}
       >
         <svg
           viewBox="0 0 800 800"
           xmlns="http://www.w3.org/2000/svg"
           style={{
             width: "100%",
-            height: "1000px",
+            height: "90%",
             position: "absolute",
             right: 0,
             transform: "translateX(-40%)",
-
+            
             overflow: "hidden",
             zIndex: 20,
           }}
@@ -110,7 +115,7 @@ const AboutOurCourse = () => {
         }}
       >
         <Typography variant="h4" color={"white"}>
-          Kurs maturalny Mathura
+          Dlaczego akurat nasz kurs?
         </Typography>
         <Box ref={boxRef} sx={{ background: "#F8F4F0", borderRadius: "50px" }}>
           <Typography variant="body1" color={"#172b3d"} sx={{ p: "50px" }}>
@@ -123,9 +128,53 @@ const AboutOurCourse = () => {
             jakość, doświadczenie i sprawdzone metody nauczania.
           </Typography>
         </Box>
-        <ExampleLesson />
+        <Box sx={{position:"absolute", bottom:"58%",left:"70%"}}>
+        <CardMedia
+              component="img"
+              style={{
+                width: "35%",
+                zIndex: 1,
+                objectFit: "contain",
+                background: "none",
+                
+              }}
+              image={stars.src}
+              alt="Logo"
+            />
+            </Box>
+            
       </Box>
+      <Box sx={{ position: "absolute", right: "80%", transform: "rotate(10deg)" }}>
+  <CardMedia
+    component="img"
+    style={{
+      width: "70%",
+      zIndex: 1,
+      objectFit: "contain",
+      background: "none",
+    }}
+    image={trophy.src}
+    alt="Logo"
+  />
+</Box>
+<Box sx={{ position: "absolute", left:"80%",top:"40%", transform: "rotate(10deg)" }}>
+  <CardMedia
+    component="img"
+    style={{
+      width: "70%",
+      zIndex: 1,
+      objectFit: "contain",
+      background: "none",
+    }}
+    image={thirty.src}
+    alt="Logo"
+  />
+</Box>
+
+ 
+
     </Box>
+    
   );
 };
 export default AboutOurCourse;
